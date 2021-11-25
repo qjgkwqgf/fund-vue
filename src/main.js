@@ -7,10 +7,16 @@ import {
   TabbarItem,
   Icon,
   Image,
+  Form,
+  Field,
+  Divider,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(Divider)
+Vue.use(Field)
+Vue.use(Form)
 Vue.use(Button)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
