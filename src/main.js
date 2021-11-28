@@ -10,10 +10,16 @@ import {
   Form,
   Field,
   Divider,
+  Tab,
+  Tabs,
+  PullRefresh,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(PullRefresh)
+Vue.use(Tabs)
+Vue.use(Tab)
 Vue.use(Divider)
 Vue.use(Field)
 Vue.use(Form)

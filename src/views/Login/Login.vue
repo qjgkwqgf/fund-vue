@@ -28,11 +28,13 @@
         </div>
       </van-form>
     </div>
-    <van-divider style="margin:2rem 0">本应用由飞鱼提供技术支持</van-divider>
+    <van-divider style="margin:5rem 0 2rem 0">本应用由飞鱼提供技术支持</van-divider>
   </div>
 </template>
 
 <script>
+import {checkLogin} from "../../http/api";
+
 export default {
   name: "Login",
   data() {
@@ -42,8 +44,15 @@ export default {
     };
   },
   methods: {
-    onSubmit(values) {
-      console.log('submit', values);
+    onSubmit() {
+      checkLogin({
+        username: this.username,
+        password: this.password,
+      })
+        .then(res => {
+          if (res.data.code === 'OK') this.$router.push('/home')
+        })
+        .catch(err => console.log(err))
     },
   },
 }
@@ -76,6 +85,7 @@ export default {
 .page .title .left img {
   width: 50%;
 }
+
 .page .form {
   padding: 0 2rem;
 }

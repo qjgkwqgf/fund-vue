@@ -16,6 +16,10 @@ const routes = [
     path: '/login',
     component: () => import('../views/Login/Login'),
   },
+  {
+    path: '/updown',
+    component: () => import('../views/UpDown/UpDown'),
+  },
 ]
 
 const router = new VueRouter({

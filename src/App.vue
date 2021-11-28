@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view :originData="originData"/>
     <main-tab-bar v-if="showTabBar"/>
   </div>
 </template>
@@ -25,19 +25,20 @@ export default {
   },
   data() {
     return {
-      showTabBar: false,
+      showTabBar: true,
+      originData: 'Hello',
     }
   },
   mounted() {
-    checkLoginStatus()
-      .then(res => {
-        if (res.data.code !== 'OK') {
-          this.$router.push('/login')
-        } else {
-          this.showTabBar = true
-        }
-      })
-      .catch(err => console.log(err))
+    // checkLoginStatus()
+    //   .then(res => {
+    //     if (res.data.code !== 'OK') {
+    //       this.$router.push('/login')
+    //       this.showTabBar = false
+    //     }
+    //   })
+    //   .catch(err => console.log(err))
   },
+  methods: {},
 };
 </script>

@@ -46,6 +46,7 @@ export default {
     },
     setActive() {
       let path = document.location.pathname
+      if (path === '/') path = '/home'
       this.tabActive = this.tabItemLists.findIndex(
         item => path === item.path || path.indexOf(item.path + '/') !== -1
       )

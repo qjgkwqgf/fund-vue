@@ -4,6 +4,14 @@ import {request} from './request'
 export function checkLoginStatus() {
   return request({
     method: 'get',
+    url: '/check-login-status',
+  })
+}
+
+export function checkLogin(data) {
+  return request({
+    method: 'post',
     url: '/check-login',
+    data,
   })
 }
