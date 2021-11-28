@@ -9,7 +9,7 @@
       <div class="left">上涨 5</div>
       <div class="right">下跌 5</div>
     </div>
-    <div class="lists">
+    <div class="lists" style="padding-bottom: 56px">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <home-list v-for="i in 20" :showBg="-2.33 > 0 ? 'rgba(252,92,101,0.2)' : 'rgba(38,222,129,0.2)'"/>
       </van-pull-refresh>

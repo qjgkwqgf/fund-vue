@@ -13,10 +13,16 @@ import {
   Tab,
   Tabs,
   PullRefresh,
+  CellGroup,
+  Cell,
+  NavBar,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(NavBar)
+Vue.use(Cell)
+Vue.use(CellGroup)
 Vue.use(PullRefresh)
 Vue.use(Tabs)
 Vue.use(Tab)

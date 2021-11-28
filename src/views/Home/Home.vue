@@ -7,7 +7,7 @@
         <van-tab title="回撤率序"></van-tab>
       </van-tabs>
     </div>
-    <div class="lists">
+    <div class="lists" style="padding-bottom: 56px">
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <home-list v-for="i in 100"/>
       </van-pull-refresh>

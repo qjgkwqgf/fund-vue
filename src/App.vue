@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view :originData="originData"/>
+    <keep-alive>
+      <router-view :originData="originData"/>
+    </keep-alive>
     <main-tab-bar v-if="showTabBar"/>
   </div>
 </template>
@@ -26,7 +28,7 @@ export default {
   data() {
     return {
       showTabBar: true,
-      originData: 'Hello',
+      originData: [],
     }
   },
   mounted() {
