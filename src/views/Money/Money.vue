@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header van-sticky--fixed">
+    <div class="header">
       <div class="left">
         <div class="title">总资产</div>
         <div class="money">￥88888.00</div>
@@ -10,11 +10,11 @@
         <div class="shouyilv">今日收益率：+2.33%</div>
       </div>
     </div>
-    <div class="body" style="padding-bottom: 56px">
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <home-list v-for="i in 20"/>
-      </van-pull-refresh>
+    <div class="btns">
+      <van-button type="info" size="small">查看所有交易日志</van-button>
+      <van-button type="primary" size="small" style="margin-left: 5px">添加新的基金</van-button>
     </div>
+    <home-list/>
   </div>
 </template>
 
@@ -25,17 +25,11 @@ export default {
   name: "Money",
   components: {HomeList},
   data() {
-    return {
-      isLoading: false,
-    }
+    return {}
   },
-  methods: {
-    onRefresh() {
-      setTimeout(() => {
-        this.isLoading = false
-        console.log('刷新成功')
-      }, 1000)
-    }
+  methods: {},
+  activated() {
+    console.log('money activated')
   },
 }
 </script>
@@ -45,7 +39,6 @@ export default {
   padding: 0.9rem 4%;
   float: left;
   width: 92%;
-  box-shadow: 0 1px 5px rgba(233, 233, 233, 1);
   background: white;
 }
 
@@ -63,7 +56,6 @@ export default {
 .header .left .money {
   font-size: 1.3rem;
   color: #e74c3c;
-  font-family: Impact, sans-serif;
 }
 
 .header .right {
@@ -75,7 +67,16 @@ export default {
 
 }
 
-.body {
-  margin-top: 80px;
+.btns {
+  width: 92%;
+  padding: 0 4% 10px 4%;
+  text-align: left;
+}
+
+.lists {
+  float: left;
+  width: 100%;
+  margin-top: 6px;
+  box-shadow: 0 1px 5px rgba(200, 200, 200, 0.8);
 }
 </style>

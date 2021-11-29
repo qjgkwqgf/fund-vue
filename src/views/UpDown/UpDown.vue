@@ -9,11 +9,7 @@
       <div class="left">上涨 5</div>
       <div class="right">下跌 5</div>
     </div>
-    <div class="lists" style="padding-bottom: 56px">
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <home-list v-for="i in 20" :showBg="-2.33 > 0 ? 'rgba(252,92,101,0.2)' : 'rgba(38,222,129,0.2)'"/>
-      </van-pull-refresh>
-    </div>
+    <home-list/>
   </div>
 </template>
 
@@ -25,18 +21,9 @@ export default {
   components: {HomeList},
   props: ['originData'],
   data() {
-    return {
-      isLoading: false,
-    }
+    return {}
   },
-  methods: {
-    onRefresh() {
-      setTimeout(() => {
-        this.isLoading = false
-        console.log('刷新成功')
-      }, 1000)
-    }
-  }
+  methods: {}
 }
 </script>
 
@@ -90,7 +77,7 @@ export default {
 
 .lists {
   float: left;
-  margin-top: 1rem;
+  margin-top: 10px;
   box-shadow: 0 -1px 4px rgba(233, 233, 233, 1);
 }
 </style>

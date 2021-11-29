@@ -7,11 +7,7 @@
         <van-tab title="回撤率序"></van-tab>
       </van-tabs>
     </div>
-    <div class="lists" style="padding-bottom: 56px">
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-        <home-list v-for="i in 100"/>
-      </van-pull-refresh>
-    </div>
+    <home-list style="margin-top: 56px"/>
   </div>
 </template>
 
@@ -24,19 +20,12 @@ export default {
   data() {
     return {
       cardActive: 0,
-      isLoading: false,
     }
   },
   methods: {
     cardChg() {
       console.log(this.cardActive)
     },
-    onRefresh() {
-      setTimeout(() => {
-        this.isLoading = false
-        console.log('刷新成功')
-      }, 1000)
-    }
   }
 }
 </script>
@@ -46,9 +35,5 @@ export default {
   padding: 12px 0;
   box-shadow: 0 1px 5px rgba(233, 233, 233, 1);
   background: white;
-}
-
-.lists {
-  margin-top: 55px;
 }
 </style>

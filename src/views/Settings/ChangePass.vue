@@ -56,10 +56,6 @@ export default {
     this.$parent.setBodyHeight()
     this.$parent.setBarTitle('修改密码')
   },
-  mounted() {
-    this.$parent.setBodyHeight()
-    this.$parent.setBarTitle('修改密码')
-  },
 }
 </script>
 

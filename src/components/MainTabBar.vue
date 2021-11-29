@@ -1,9 +1,9 @@
 <template>
   <van-tabbar v-model="tabActive" class="own-tab-bar" active-color="#e74c3c">
     <van-tabbar-item
-      v-for="item in tabItemLists"
-      :icon="item.icon"
-      @click="clickTabItem(item.path)"
+        v-for="item in tabItemLists"
+        :icon="item.icon"
+        @click="clickTabItem(item.path)"
     >
       {{ item.name }}
     </van-tabbar-item>
@@ -42,13 +42,14 @@ export default {
   },
   methods: {
     clickTabItem(path) {
-      this.$router.push(path)
+      const oldPath = document.location.pathname
+      if (path !== oldPath) this.$router.push(path)
     },
     setActive() {
       let path = document.location.pathname
       if (path === '/') path = '/home'
       this.tabActive = this.tabItemLists.findIndex(
-        item => path === item.path || path.indexOf(item.path + '/') !== -1
+          item => path === item.path || path.indexOf(item.path + '/') !== -1
       )
     }
   },
