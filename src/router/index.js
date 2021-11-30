@@ -39,6 +39,10 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/money/:id',
+    component: () => import('../views/Money/Fund')
+  },
 ]
 
 const router = new VueRouter({

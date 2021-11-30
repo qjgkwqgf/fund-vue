@@ -16,10 +16,12 @@ import {
   CellGroup,
   Cell,
   NavBar,
+  List,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(List)
 Vue.use(NavBar)
 Vue.use(Cell)
 Vue.use(CellGroup)
