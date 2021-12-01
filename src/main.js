@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueCookies from 'vue-cookies'
 import {
   Button,
   Tabbar,
@@ -41,6 +42,7 @@ Vue.use(TabbarItem)
 Vue.use(Icon)
 Vue.use(Image)
 
+Vue.use(VueCookies)
 new Vue({
   router,
   render: h => h(App)

@@ -32,14 +32,16 @@ export default {
     }
   },
   mounted() {
-    // checkLoginStatus()
-    //   .then(res => {
-    //     if (res.data.code !== 'OK') {
-    //       this.$router.push('/login')
-    //       this.showTabBar = false
-    //     }
-    //   })
-    //   .catch(err => console.log(err))
+    checkLoginStatus({
+      token: this.$cookies.get('token'),
+    })
+      .then(res => {
+        if (res.data.code !== 'OK') {
+          this.$router.push('/login')
+          this.showTabBar = false
+        }
+      })
+      .catch(err => console.log(err))
   },
   methods: {},
 };

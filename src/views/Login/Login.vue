@@ -50,7 +50,10 @@ export default {
         password: this.password,
       })
         .then(res => {
-          if (res.data.code === 'OK') this.$router.push('/home')
+          if (res.data.code === 'OK') {
+            this.$cookies.set('token', res.data.token, '1d')
+            this.$router.push('/home')
+          }
         })
         .catch(err => console.log(err))
     },

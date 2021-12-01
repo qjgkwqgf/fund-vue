@@ -5,7 +5,7 @@ import {Toast} from "vant";
 export function request(config) {
   const server = new axios.create({
     // baseURL: 'https://xxxx.com',
-    baseURL: 'http://192.168.31.12:3096',
+    baseURL: 'http://192.168.31.12:3989',
     timeout: 10 * 1000,
   })
 

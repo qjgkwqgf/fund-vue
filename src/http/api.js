@@ -1,10 +1,11 @@
 import {request} from './request'
 
 // 检查登录状态
-export function checkLoginStatus() {
+export function checkLoginStatus(data) {
   return request({
-    method: 'get',
-    url: '/check-login-status',
+    method: 'post',
+    url: '/check-token',
+    data,
   })
 }
 
