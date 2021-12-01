@@ -17,10 +17,14 @@ import {
   Cell,
   NavBar,
   List,
+  RadioGroup,
+  Radio,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(RadioGroup)
+Vue.use(Radio)
 Vue.use(List)
 Vue.use(NavBar)
 Vue.use(Cell)

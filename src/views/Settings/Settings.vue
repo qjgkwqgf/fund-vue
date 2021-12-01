@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" style="padding-top: 46px">
     <navbar :bar-title="barTitle"/>
     <div class="body" style="padding-bottom: 56px" :style="'height:'+bodyHeight">
       <keep-alive>

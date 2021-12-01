@@ -57,7 +57,7 @@ export default {
     this.setActive()
   },
   watch: {
-    $router() {
+    $route() {
       this.setActive()
     }
   }

@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     listClick() {
-      this.$router.push('/money/1024')
+      this.$router.push('/money/fund/1024')
     },
     onRefresh() {
       setTimeout(() => {

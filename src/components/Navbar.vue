@@ -5,6 +5,7 @@
     left-arrow
     @click-left="onClickLeft"
     style="box-shadow:0 1px 5px rgba(233,233,233,0.8)"
+    class="van-nav-bar--fixed"
   />
 </template>
 

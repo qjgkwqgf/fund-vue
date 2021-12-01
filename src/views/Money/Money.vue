@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="btns">
-      <van-button type="info" size="small">查看所有交易日志</van-button>
-      <van-button type="primary" size="small" style="margin-left: 5px">添加新的基金</van-button>
+      <van-button type="info" size="small" @click="allLogs">查看所有交易日志</van-button>
+      <van-button type="primary" size="small" style="margin-left: 5px" @click="addFund">添加新的基金</van-button>
     </div>
     <home-list/>
   </div>
@@ -27,9 +27,16 @@ export default {
   data() {
     return {}
   },
-  methods: {},
-  activated() {
-    console.log('money activated')
+  methods: {
+    activated() {
+      console.log('money activated')
+    },
+    allLogs(){
+      this.$router.push('/money/all-logs')
+    },
+    addFund(){
+      this.$router.push('/money/add-fund')
+    },
   },
 }
 </script>
@@ -71,12 +78,5 @@ export default {
   width: 92%;
   padding: 0 4% 10px 4%;
   text-align: left;
-}
-
-.lists {
-  float: left;
-  width: 100%;
-  margin-top: 6px;
-  box-shadow: 0 1px 5px rgba(200, 200, 200, 0.8);
 }
 </style>

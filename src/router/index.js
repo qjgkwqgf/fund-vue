@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import * as path from "path";
 
 Vue.use(VueRouter)
 
@@ -40,8 +39,28 @@ const routes = [
     ],
   },
   {
-    path: '/money/:id',
+    path: '/money/fund/:id',
     component: () => import('../views/Money/Fund')
+  },
+  {
+    path: '/money/all-logs',
+    component: () => import('../views/Money/AllLogs')
+  },
+  {
+    path: '/money/add-fund',
+    component: () => import('../views/Money/AddFund')
+  },
+  {
+    path: '/money/edit-fund/:id',
+    component: () => import('../views/Money/EditFund')
+  },
+  {
+    path: '/money/add-log',
+    component: () => import('../views/Money/AddLog')
+  },
+  {
+    path: '/money/edit-log/:id',
+    component: () => import('../views/Money/EditLog')
   },
 ]
 
