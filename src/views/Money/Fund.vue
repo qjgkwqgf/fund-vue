@@ -64,13 +64,13 @@ export default {
     editFund(fundCode) {
       this.$router.push('/money/edit-fund/' + fundCode)
     },
-    delFund(id){
+    delFund(id) {
       console.log(id)
     },
   },
-  mounted() {
-    console.log(this.$route.params.id)
-  }
+  activated() {
+    window.scrollTo(0, 0)
+  },
 }
 </script>
 
@@ -93,6 +93,7 @@ export default {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
 .header .small {
   font-size: 0.9rem;
   color: darkgray;

@@ -52,6 +52,7 @@ export default {
         .then(res => {
           if (res.data.code === 'OK') {
             this.$cookies.set('token', res.data.token, '1d')
+            this.$cookies.set('user', res.data.user, '1d')
             this.$router.push('/home')
           }
         })

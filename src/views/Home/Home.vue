@@ -20,13 +20,21 @@ export default {
   data() {
     return {
       cardActive: 0,
+      scrollTop: 0,
     }
   },
   methods: {
     cardChg() {
       console.log(this.cardActive)
     },
-  }
+  },
+  activated() {
+    window.scrollTo(0, this.scrollTop)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    next()
+  },
 }
 </script>
 

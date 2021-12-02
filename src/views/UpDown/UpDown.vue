@@ -21,9 +21,18 @@ export default {
   components: {HomeList},
   props: ['originData'],
   data() {
-    return {}
+    return {
+      scrollTop: 0,
+    }
   },
-  methods: {}
+  methods: {},
+  activated() {
+    window.scrollTo(0, this.scrollTop)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    next()
+  },
 }
 </script>
 

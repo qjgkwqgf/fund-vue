@@ -10,6 +10,7 @@
 <script>
 import Navbar from "../../components/Navbar";
 import FundForm from "../../components/FundForm";
+import {addFund} from '../../http/api'
 
 export default {
   name: "AddFund",
@@ -28,8 +29,17 @@ export default {
     }
   },
   methods: {
-    subData(data){
-      console.log(data)
+    subData(data) {
+      addFund({
+        token: this.$cookies.get('token'),
+        fundCode: data.fundCode,
+        maxSumPrice: data.maxSumPrice,
+        count: data.count,
+        cost: data.cost,
+        about: data.about,
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
   },
 }

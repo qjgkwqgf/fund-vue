@@ -3,7 +3,7 @@
     <keep-alive>
       <router-view :originData="originData"/>
     </keep-alive>
-    <main-tab-bar v-if="showTabBar"/>
+    <main-tab-bar/>
   </div>
 </template>
 
@@ -19,7 +19,7 @@
 
 <script>
 import MainTabBar from "./components/MainTabBar";
-import {checkLoginStatus} from "./http/api";
+import {getFundDatas} from "./http/api";
 
 export default {
   components: {
@@ -27,19 +27,21 @@ export default {
   },
   data() {
     return {
-      showTabBar: true,
       originData: [],
     }
   },
   mounted() {
-    checkLoginStatus({
-      token: this.$cookies.get('token'),
+    // 获取基础数据
+    getFundDatas({
+      token: this.$cookies.get('token')
     })
       .then(res => {
         if (res.data.code !== 'OK') {
-          this.$router.push('/login')
-          this.showTabBar = false
+          this.$cookies.remove('user')
+          this.$cookies.remove('token')
+          return
         }
+        console.log('ok')
       })
       .catch(err => console.log(err))
   },

@@ -2,9 +2,10 @@
   <div>
     <div class="title">账户管理</div>
     <van-cell-group inset>
-      <van-cell title="当前登录账号" value="飞鱼"/>
-      <van-cell title="修改登录密码" is-link @click="changePass"/>
-      <van-cell title="退出登录" is-link @click="exitLogin"/>
+      <van-cell title="登录账号" is-link @click="toLogin" v-if="!user"/>
+      <van-cell title="当前登录账号" :value="user" v-else/>
+      <van-cell title="修改登录密码" is-link @click="changePass" v-if="user"/>
+      <van-cell title="退出登录" is-link @click="exitLogin" v-if="user"/>
     </van-cell-group>
     <div class="title" style="padding-top: 20px">关于</div>
     <van-cell-group inset>
@@ -23,6 +24,7 @@ export default {
   data() {
     return {
       bodyHeight: 'auto',
+      user: this.$cookies.get('user'),
     }
   },
   methods: {
@@ -41,14 +43,14 @@ export default {
           // cancel
         })
     },
+    toLogin() {
+      this.$router.push('/settings/login')
+    },
   },
   activated() {
     this.$parent.setBodyHeight()
     this.$parent.setBarTitle('设置')
-  },
-  mounted() {
-    this.$parent.setBodyHeight()
-    this.$parent.setBarTitle('设置')
+    this.user = this.$cookies.get('user')
   },
 }
 </script>

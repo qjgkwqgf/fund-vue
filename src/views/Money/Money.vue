@@ -25,18 +25,27 @@ export default {
   name: "Money",
   components: {HomeList},
   data() {
-    return {}
+    return {
+      scrollTop: 0,
+    }
   },
   methods: {
     activated() {
       console.log('money activated')
     },
-    allLogs(){
+    allLogs() {
       this.$router.push('/money/all-logs')
     },
-    addFund(){
+    addFund() {
       this.$router.push('/money/add-fund')
     },
+  },
+  activated() {
+    window.scrollTo(0, this.scrollTop)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    next()
   },
 }
 </script>
