@@ -2,7 +2,7 @@
   <div>
     <navbar bar-title="添加基金"/>
     <div class="form" style="padding:55px 4% 56px 4%">
-      <fund-form @subData="subData" :settings="settings"/>
+      <fund-form @subData="subData" :settings="settings" ref="form"/>
     </div>
   </div>
 </template>
@@ -10,7 +10,8 @@
 <script>
 import Navbar from "../../components/Navbar";
 import FundForm from "../../components/FundForm";
-import {addFund} from '../../http/api'
+import {addFund, getFundDatas} from '../../http/api'
+import {Toast} from 'vant'
 
 export default {
   name: "AddFund",
@@ -30,15 +31,14 @@ export default {
   },
   methods: {
     subData(data) {
-      addFund({
-        token: this.$cookies.get('token'),
-        fundCode: data.fundCode,
-        maxSumPrice: data.maxSumPrice,
-        count: data.count,
-        cost: data.cost,
-        about: data.about,
-      })
-        .then(res => console.log(res))
+      addFund(data)
+        .then(res => {
+          if (res.data.code === 'OK') {
+            Toast.success('添加成功')
+            this.$parent.getFundData()
+            this.$refs.form.clearForm()
+          }
+        })
         .catch(err => console.log(err))
     }
   },

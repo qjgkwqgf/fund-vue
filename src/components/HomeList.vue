@@ -1,36 +1,35 @@
 <template>
   <div class="lists" style="padding-bottom: 56px">
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <div style="line-height:10rem" v-if="mbData.length===0">数据加载中...</div>
       <div
-        v-for="i in 20"
+        v-if="mbData!=='empty'"
+        v-for="fund in mbData"
         @click="listClick"
         class="list"
-        :class="point>0 ? 'red' : 'green'"
+        :class="fund.point>0 ? 'red' : 'green'"
         :style="showBg ? 'background: linear-gradient(to right, '+showBg+' '+Math.floor(Math.abs(point)*10)+'%, white 0%)' : ''"
       >
         <div class="left">
-          <div class="large">左边的标题文本</div>
-          <div class="small">左边的副文本</div>
+          <div class="large">{{ fund.leftBig }}</div>
+          <div class="small">{{ fund.leftSmall }}</div>
         </div>
         <div class="right">
-          <div class="large">
-            <span v-show="point>0">+</span>
-            {{ point }}%
-          </div>
-          <div class="small">-10.23%</div>
+          <div class="large">{{ fund.rightBig }}</div>
+          <div class="small">{{ fund.rightSmall }}</div>
         </div>
       </div>
     </van-pull-refresh>
+    <div style="line-height:20rem" v-if="mbData==='empty'">空空如也~</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "HomeList",
-  props: ['showBg'],
+  props: ['showBg', 'mbData'],
   data() {
     return {
-      point: -5.33,
       isLoading: false,
     }
   },
@@ -76,7 +75,7 @@ export default {
 }
 
 .list .small {
-  font-size: .8rem;
+  font-size: .88rem;
   width: 100%;
   color: darkgray;
 }

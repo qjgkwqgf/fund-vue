@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view :originData="originData"/>
+      <router-view :originData="originData" ref="view"/>
     </keep-alive>
     <main-tab-bar/>
   </div>
@@ -19,7 +19,7 @@
 
 <script>
 import MainTabBar from "./components/MainTabBar";
-import {getFundDatas} from "./http/api";
+import {getFundData} from "./http/api";
 
 export default {
   components: {
@@ -31,20 +31,25 @@ export default {
     }
   },
   mounted() {
-    // 获取基础数据
-    getFundDatas({
-      token: this.$cookies.get('token')
-    })
-      .then(res => {
-        if (res.data.code !== 'OK') {
-          this.$cookies.remove('user')
-          this.$cookies.remove('token')
-          return
-        }
-        console.log('ok')
-      })
-      .catch(err => console.log(err))
+    this.getFundData()
   },
-  methods: {},
+  methods: {
+    getFundData() {
+      getFundData({
+        token: this.$cookies.get('token')
+      })
+        .then(res => {
+          if (res.data.code !== 'OK') {
+            this.$cookies.remove('user')
+            this.$cookies.remove('token')
+            this.originData = 'empty'
+            return
+          }
+          this.originData = res.data.fundData
+          if (this.originData.length === 0) this.originData = 'empty'
+        })
+        .catch(err => console.log(err))
+    }
+  },
 };
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div>
     <h4>今日涨跌</h4>
-    <div class="process-line">
-      <div class="left">50%</div>
-      <div class="right">50%</div>
+    <div class="process-line" v-show="up+down>0">
+      <div class="left" :style="`width:${leftW}%`">{{ leftW }}%</div>
+      <div class="right" :style="`width:${rightW}%`">{{ rightW }}%</div>
     </div>
     <div class="up-down-text">
-      <div class="left">上涨 5</div>
-      <div class="right">下跌 5</div>
+      <div class="left">上涨 {{ up }}</div>
+      <div class="right">下跌 {{ down }}</div>
     </div>
-    <home-list/>
+    <home-list :mb-data="mbData"/>
   </div>
 </template>
 
@@ -23,16 +23,58 @@ export default {
   data() {
     return {
       scrollTop: 0,
+      mbData: [],
+      up: 0,
+      down: 0,
+      leftW: 50,
+      rightW: 50,
     }
   },
-  methods: {},
+  methods: {
+    formatData() {
+      this.mbData = []
+      const oData = this.originData
+      oData.forEach(item => {
+        let leftBig, leftSmall, rightBig, rightSmall, paixu
+        leftBig = item.name
+        leftSmall = item.count * item.jsPrice
+        paixu = item.gsPoint * 100
+        rightBig = `${paixu.toFixed(2)}%`
+        rightSmall = (item.gsPrice - item.jsPrice) * item.count
+        let fh = ''
+        if (rightSmall > 0) fh = '+'
+        item.gsPoint > 0
+          ? this.up++
+          : this.down++
+        rightSmall = fh + rightSmall.toFixed(2)
+        leftSmall = `结算金额：${leftSmall.toFixed(2)}`
+        this.mbData.push({
+          leftBig,
+          leftSmall,
+          rightBig,
+          rightSmall,
+          point: item.gsPoint,
+          paixu,
+        })
+      })
+      this.mbData.sort((a, b) => a.paixu - b.paixu)
+      this.leftW = (this.up / (this.up + this.down) * 100).toFixed(0)
+      this.rightW = 100 - this.leftW
+      window.scrollTo(0, this.scrollTop)
+    }
+  },
   activated() {
-    window.scrollTo(0, this.scrollTop)
+    this.formatData()
   },
   beforeRouteLeave(to, from, next) {
     this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
     next()
   },
+  watch: {
+    originData() {
+      this.formatData()
+    }
+  }
 }
 </script>
 
@@ -86,6 +128,7 @@ export default {
 
 .lists {
   float: left;
+  width: 100%;
   margin-top: 10px;
   box-shadow: 0 -1px 4px rgba(233, 233, 233, 1);
 }
