@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import {Toast} from 'vant'
+import {editPass} from '../../http/api'
+
 export default {
   name: "ChangePass",
   data() {
@@ -49,7 +52,27 @@ export default {
       history.go(-1)
     },
     onSubmit() {
-      console.log('submit')
+      if (this.newPass.length < 6 || this.newPass2.length < 6) {
+        Toast.fail('密码最短不能小于 6 位')
+        return
+      }
+      if (this.newPass !== this.newPass2) {
+        Toast.fail('两次输入的新密码不一致')
+        return
+      }
+      const data = {
+        token: this.$cookies.get('token'),
+        oldPass: this.oldPass,
+        newPass: this.newPass,
+      }
+      editPass(data)
+        .then(res => {
+          if (res.data.code === 'OK') {
+            Toast.success('修改成功')
+            this.$router.push('/settings')
+          }
+        })
+        .catch(err => console.log(err))
     },
   },
   activated() {

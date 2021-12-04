@@ -9,8 +9,8 @@
         class="right"
         :class="todayMoney>0? 'red' : 'green'"
       >
-        <div class="shouyi">今日收益：{{ todayMoney.toFixed(2) }}</div>
-        <div class="shouyilv">今日收益率：{{ todayPoint.toFixed(2) }}%</div>
+        <div class="shouyi">今日收益：{{ showN(todayMoney) }}</div>
+        <div class="shouyilv">今日收益率：{{ showN(todayPoint) }}%</div>
       </div>
     </div>
     <div class="btns">
@@ -68,6 +68,7 @@ export default {
         leftSmall = `今日收益：${fh + leftSmall.toFixed(2)}%`
         rightSmall = fh + rightSmall.toFixed(2)
         this.mbData.push({
+          id: item.id,
           leftBig,
           leftSmall,
           rightBig,
@@ -79,6 +80,15 @@ export default {
       this.mbData.sort((a, b) => b.paixu - a.paixu)
       this.todayPoint = this.todayMoney / this.sumMoney * 100
       window.scrollTo(0, this.scrollTop)
+    },
+  },
+  computed: {
+    showN() {
+      return function (num) {
+        num = parseFloat(num)
+        if (num > 0) return '+' + num.toFixed(2)
+        else return num.toFixed(2)
+      }
     },
   },
   activated() {

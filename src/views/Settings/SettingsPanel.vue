@@ -34,10 +34,12 @@ export default {
     exitLogin() {
       Dialog.confirm({
         title: '退出登录',
-        message: '确定要退出账号【飞鱼】吗？',
+        message: '确定要退出账号吗？',
       })
         .then(() => {
-          console.log('确认退出')
+          this.$cookies.set('token','','1s')
+          this.$cookies.set('user','','1s')
+          this.$router.push('/settings/login')
         })
         .catch(() => {
           // cancel

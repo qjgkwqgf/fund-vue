@@ -74,6 +74,7 @@ export default {
           rightSmall = fh + rightSmall + '%'
         }
         this.mbData.push({
+          id: item.id,
           leftBig,
           leftSmall,
           rightBig,

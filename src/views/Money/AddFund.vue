@@ -35,7 +35,7 @@ export default {
         .then(res => {
           if (res.data.code === 'OK') {
             Toast.success('添加成功')
-            this.$parent.getFundData()
+            this.$parent.getSingleFund(data.fundCode)
             this.$refs.form.clearForm()
           }
         })

@@ -5,7 +5,7 @@
       <div
         v-if="mbData!=='empty'"
         v-for="fund in mbData"
-        @click="listClick"
+        @click="listClick(fund.id)"
         class="list"
         :class="fund.point>0 ? 'red' : 'green'"
         :style="showBg ? 'background: linear-gradient(to right, '+showBg+' '+Math.floor(Math.abs(point)*10)+'%, white 0%)' : ''"
@@ -34,8 +34,8 @@ export default {
     }
   },
   methods: {
-    listClick() {
-      this.$router.push('/money/fund/1024')
+    listClick(code) {
+      this.$router.push('/money/fund/'+code)
     },
     onRefresh() {
       setTimeout(() => {

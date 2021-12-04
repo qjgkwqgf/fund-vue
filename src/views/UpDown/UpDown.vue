@@ -34,11 +34,15 @@ export default {
     formatData() {
       this.mbData = []
       const oData = this.originData
+      if (oData === 'empty') {
+        this.mbData = oData
+        return
+      }
       oData.forEach(item => {
         let leftBig, leftSmall, rightBig, rightSmall, paixu
         leftBig = item.name
         leftSmall = item.count * item.jsPrice
-        paixu = item.gsPoint * 100
+        paixu = item.gsPoint
         rightBig = `${paixu.toFixed(2)}%`
         rightSmall = (item.gsPrice - item.jsPrice) * item.count
         let fh = ''
@@ -47,8 +51,10 @@ export default {
           ? this.up++
           : this.down++
         rightSmall = fh + rightSmall.toFixed(2)
+        rightBig = fh + rightBig
         leftSmall = `结算金额：${leftSmall.toFixed(2)}`
         this.mbData.push({
+          id: item.id,
           leftBig,
           leftSmall,
           rightBig,
