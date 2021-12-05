@@ -55,6 +55,7 @@ export default {
       getSingleFund({token, code})
         .then(res => {
           if (res.data.code === 'OK') {
+            if (this.originData === 'empty') this.originData = []
             const idx = this.originData.findIndex(item => item.code === res.data.fundData.code)
             idx === -1
               ? this.originData.push(res.data.fundData)

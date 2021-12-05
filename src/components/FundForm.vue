@@ -14,6 +14,7 @@
         label="基金名称"
         placeholder="基金名称"
         :disabled="settings.btnText==='修改基金信息'"
+        v-if="settings.btnText==='修改基金信息'"
       />
       <van-field
         v-model="count"

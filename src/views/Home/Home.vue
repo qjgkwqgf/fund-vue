@@ -28,6 +28,7 @@ export default {
   methods: {
     cardChg() {
       this.formatData(this.cardActive)
+      window.scrollTo(0, 0)
     },
     formatData(tab) {
       this.mbData = []
