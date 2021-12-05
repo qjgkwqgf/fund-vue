@@ -31,7 +31,7 @@ export default {
           if (res.data.code === 'OK') {
             Toast.success('修改成功')
             this.$parent.getSingleFund(data.fundCode)
-            this.$router.push('/money/fund/' + data.id)
+            history.go(-1)
           }
         })
         .catch(err => console.log(err))
@@ -42,6 +42,7 @@ export default {
       const fund = oData.find(item => item.id === ~~this.id)
       this.settings = {
         fundCode: fund.code,
+        fundName: fund.name,
         count: fund.count,
         cost: fund.cost,
         maxSumPrice: fund.ljMaxPrice,

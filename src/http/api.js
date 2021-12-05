@@ -55,3 +55,43 @@ export function editPass(data) {
     data,
   })
 }
+
+export function getAllLogs(data) {
+  return request({
+    method: 'post',
+    url: '/logs/all',
+    data,
+  })
+}
+
+export function addNewLog(data) {
+  return request({
+    method: 'post',
+    url: '/logs/add',
+    data,
+  })
+}
+
+export function getBuyLogs(data) {
+  return request({
+    method: 'post',
+    url: '/logs/all',
+    data,
+  })
+}
+
+export function getSingleLog(data) {
+  return request({
+    method: 'post',
+    url: '/logs/single',
+    data,
+  })
+}
+
+export function editLog(data) {
+  return request({
+    method: 'post',
+    url: '/logs/edit',
+    data,
+  })
+}

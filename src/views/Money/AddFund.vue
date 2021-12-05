@@ -37,6 +37,7 @@ export default {
             Toast.success('添加成功')
             this.$parent.getSingleFund(data.fundCode)
             this.$refs.form.clearForm()
+            history.go(-1)
           }
         })
         .catch(err => console.log(err))

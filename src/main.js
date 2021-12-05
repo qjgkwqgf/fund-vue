@@ -20,10 +20,12 @@ import {
   List,
   RadioGroup,
   Radio,
+  Calendar,
 } from 'vant';
 
 Vue.config.productionTip = false
 
+Vue.use(Calendar)
 Vue.use(RadioGroup)
 Vue.use(Radio)
 Vue.use(List)

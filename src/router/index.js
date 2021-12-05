@@ -55,7 +55,7 @@ const routes = [
     component: () => import('../views/Money/EditFund')
   },
   {
-    path: '/money/add-log',
+    path: '/money/add-log/:code',
     component: () => import('../views/Money/AddLog')
   },
   {

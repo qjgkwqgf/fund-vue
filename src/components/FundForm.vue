@@ -6,7 +6,13 @@
         name="基金代码"
         label="基金代码"
         placeholder="基金代码"
-        :rules="[{ required: true, message: '请填写基金代码' }]"
+        :disabled="settings.btnText==='修改基金信息'"
+      />
+      <van-field
+        v-model="fundName"
+        name="基金名称"
+        label="基金名称"
+        placeholder="基金名称"
         :disabled="settings.btnText==='修改基金信息'"
       />
       <van-field
@@ -55,6 +61,7 @@ export default {
   data() {
     return {
       fundCode: this.settings.fundCode,
+      fundName: this.settings.fundName,
       count: this.settings.count,
       cost: this.settings.cost,
       maxSumPrice: this.settings.maxSumPrice,

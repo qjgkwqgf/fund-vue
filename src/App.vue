@@ -65,6 +65,9 @@ export default {
     },
     delFund(id) {
       this.originData = this.originData.filter(item => item.id !== id)
+      if (this.originData.length === 0) {
+        this.originData = 'empty'
+      }
     },
   },
 };

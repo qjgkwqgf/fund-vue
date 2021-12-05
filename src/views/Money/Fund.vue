@@ -39,7 +39,7 @@
         <van-button type="warning" size="small" style="margin-left: 5px" @click="editFund(fund.id)">修改基金</van-button>
         <van-button type="danger" size="small" style="margin-left: 5px" @click="delFund(fund.id)">取消关注</van-button>
       </div>
-      <logs style="margin-bottom: 56px"/>
+      <logs style="margin-bottom: 56px" :logs-data="logsData" ref="lgs"/>
     </div>
   </div>
 </template>
@@ -47,8 +47,8 @@
 <script>
 import Navbar from "../../components/Navbar";
 import Logs from "../../components/Logs";
-import {Dialog,Toast} from 'vant'
-import {delFund} from '../../http/api'
+import {Dialog, Toast} from 'vant'
+import {delFund, getBuyLogs} from '../../http/api'
 
 export default {
   name: "Fund",
@@ -60,6 +60,9 @@ export default {
       id: this.$route.params.id,
       fund: undefined,
       have: 0,
+      p: 1,
+      logsData: [],
+      newCount: 0,
     }
   },
   methods: {
@@ -70,12 +73,13 @@ export default {
       if (oData === 'empty') return
       this.fund = oData.find(item => item.id === ~~this.id)
       this.have = this.fund.count * this.fund.gsPrice
+      this.getBuyLogs()
     },
     toWeb() {
       window.open('https://h5.1234567.com.cn/app/fund-details/?fCode=' + this.fund.code, '_blank')
     },
-    addLog() {
-      this.$router.push('/money/add-log')
+    addLog(code) {
+      this.$router.push('/money/add-log/' + code)
     },
     editFund(id) {
       this.$router.push('/money/edit-fund/' + id)
@@ -89,7 +93,7 @@ export default {
           const token = this.$cookies.get('token')
           delFund({token, id})
             .then(res => {
-              if(res.data.code==='OK'){
+              if (res.data.code === 'OK') {
                 Toast.success('删除成功')
                 this.$parent.delFund(id)
                 this.$router.push('/money')
@@ -102,7 +106,25 @@ export default {
         });
     },
     getBuyLogs() {
-      //  **** 这里继续
+      const data = {
+        token: this.$cookies.get('token'),
+        p: this.p,
+        code: this.fund.code,
+      }
+      getBuyLogs(data)
+        .then(res => {
+          this.logsData = res.data.logs
+          this.newCount = res.data.logs.length
+        })
+        .catch(err => console.log(err))
+    },
+    incPage() {
+      if (this.newCount >= 20) {
+        this.p++
+        this.getAllLogs()
+      } else {
+        this.$refs.lgs.setEnd()
+      }
     },
   },
   activated() {
@@ -120,7 +142,7 @@ export default {
   watch: {
     originData() {
       this.setData()
-    }
+    },
   },
 }
 </script>
@@ -167,6 +189,7 @@ export default {
   line-height: 1.5;
   padding-top: 15px;
   text-align: left;
+  font-size: 0.88rem;
 }
 
 .body {
