@@ -33,6 +33,8 @@ export default {
   methods: {
     formatData() {
       this.mbData = []
+      this.up = 0
+      this.down = 0
       const oData = this.originData
       if (oData === 'empty') {
         this.mbData = oData
