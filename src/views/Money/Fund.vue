@@ -76,7 +76,7 @@ export default {
       this.getBuyLogs()
     },
     toWeb() {
-      window.open('https://h5.1234567.com.cn/app/fund-details/?fCode=' + this.fund.code, '_blank')
+      window.open('https://api.feiyu.me/jump/' + this.fund.code, '_blank')
     },
     addLog(code) {
       this.$router.push('/money/add-log/' + code)
