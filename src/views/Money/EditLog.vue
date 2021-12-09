@@ -18,6 +18,13 @@
           readonly
         />
         <van-field
+          v-model="date"
+          name="买入日期"
+          label="买入日期"
+          placeholder="买入日期"
+          readonly
+        />
+        <van-field
           v-model="cost"
           name="买入金额"
           type="number"
@@ -58,6 +65,7 @@
 import Navbar from "../../components/Navbar";
 import {getSingleLog, editLog} from '../../http/api'
 import {Dialog, Toast} from 'vant'
+import moment from "moment";
 
 export default {
   name: "EditLog",
@@ -71,6 +79,7 @@ export default {
       about: '',
       status: 'wait',
       count: 0,
+      date: '',
     }
   },
   methods: {
@@ -121,6 +130,8 @@ export default {
           this.cost = res.data.log.cost
           this.about = res.data.log.about
           this.status = res.data.log.status
+          this.count = 0
+          this.date = moment(res.data.log.date).format('YYYY/MM/DD')
         })
         .catch(err => console.log(err))
     },

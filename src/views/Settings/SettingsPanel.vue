@@ -4,12 +4,13 @@
     <van-cell-group inset>
       <van-cell title="登录账号" is-link @click="toLogin" v-if="!user"/>
       <van-cell title="当前登录账号" :value="user" v-else/>
+      <van-cell title="关注基金数" :value="fundCount+'/100'" v-if="user"/>
       <van-cell title="修改登录密码" is-link @click="changePass" v-if="user"/>
       <van-cell title="退出登录" is-link @click="exitLogin" v-if="user"/>
     </van-cell-group>
     <div class="title" style="padding-top: 20px">关于</div>
     <van-cell-group inset>
-      <van-cell title="版本号" value="0.1.0"/>
+      <van-cell title="版本号" value="0.1.2"/>
       <van-cell title="作者信箱" value="admin@feiyu.me"/>
       <van-cell title="帮助" label="保持耐心，做时间的朋友。"/>
     </van-cell-group>
@@ -21,6 +22,7 @@ import {Dialog} from "vant";
 
 export default {
   name: "SettingsPanel",
+  props: ['fundCount'],
   data() {
     return {
       bodyHeight: 'auto',
@@ -37,8 +39,8 @@ export default {
         message: '确定要退出账号吗？',
       })
         .then(() => {
-          this.$cookies.set('token','','1s')
-          this.$cookies.set('user','','1s')
+          this.$cookies.set('token', '', '1s')
+          this.$cookies.set('user', '', '1s')
           this.$router.push('/settings/login')
         })
         .catch(() => {

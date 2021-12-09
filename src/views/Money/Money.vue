@@ -2,15 +2,15 @@
   <div>
     <div class="header">
       <div class="left">
-        <div class="title">总资产</div>
+        <div class="title">结算总资产</div>
         <div class="money">￥{{ sumMoney.toFixed(2) }}</div>
       </div>
       <div
         class="right"
-        :class="todayMoney>0? 'red' : 'green'"
+        :class="allShouyi>0 ? 'red' : 'green'"
       >
-        <div class="shouyi">今日收益：{{ showN(todayMoney) }}</div>
-        <div class="shouyilv">今日收益率：{{ showN(todayPoint) }}%</div>
+        <div class="shouyi">估算总收益：{{ showN(allShouyi) }}</div>
+        <div class="shouyilv">估算收益率：{{ showN(allShouyi / allCost * 100) }}%</div>
       </div>
     </div>
     <div class="btns">
@@ -32,8 +32,8 @@ export default {
     return {
       scrollTop: 0,
       sumMoney: 0,
-      todayMoney: 0,
-      todayPoint: 0,
+      allShouyi: 0,
+      allCost: 0,
       mbData: [],
     }
   },
@@ -47,8 +47,8 @@ export default {
     formatData() {
       this.mbData = []
       this.sumMoney = 0
-      this.todayMoney = 0
-      this.todayPoint = 0
+      this.allShouyi = 0
+      this.allCost = 0
       const oData = this.originData
       if (oData === 'empty') {
         this.mbData = oData
@@ -59,14 +59,15 @@ export default {
         leftBig = item.name
         paixu = item.count * item.jsPrice
         this.sumMoney += paixu
-        this.todayMoney += (item.gsPrice - item.jsPrice) * item.count
-        leftSmall = item.gsPoint
+        leftSmall = item.count * item.gsPrice - item.cost
+        this.allShouyi += leftSmall
+        this.allCost += item.cost
         rightBig = paixu.toFixed(2)
-        rightSmall = (item.gsPrice - item.jsPrice) * item.count
+        rightSmall = leftSmall / item.cost * 100
         let fh = ''
         if (leftSmall > 0) fh = '+'
-        leftSmall = `今日收益：${fh + leftSmall.toFixed(2)}%`
-        rightSmall = fh + rightSmall.toFixed(2)
+        leftSmall = `估算总收益：${fh + leftSmall.toFixed(2)}`
+        rightSmall = fh + rightSmall.toFixed(2) + '%'
         this.mbData.push({
           id: item.id,
           leftBig,

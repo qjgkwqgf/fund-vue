@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view :originData="originData" ref="view"/>
+      <router-view :originData="originData" :fundCount="fundCount" ref="view"/>
     </keep-alive>
     <main-tab-bar/>
   </div>
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       originData: [],
+      fundCount: 0,
     }
   },
   mounted() {
@@ -36,6 +37,7 @@ export default {
   methods: {
     getFundData() {
       this.originData = []
+      this.fundCount = 0
       const token = this.$cookies.get('token')
       getFundData({token})
         .then(res => {
@@ -46,6 +48,7 @@ export default {
             return
           }
           this.originData = res.data.fundData
+          this.fundCount = res.data.count
           if (this.originData.length === 0) this.originData = 'empty'
         })
         .catch(err => console.log(err))
@@ -57,14 +60,18 @@ export default {
           if (res.data.code === 'OK') {
             if (this.originData === 'empty') this.originData = []
             const idx = this.originData.findIndex(item => item.code === res.data.fundData.code)
-            idx === -1
-              ? this.originData.push(res.data.fundData)
-              : this.originData.splice(idx, 1, res.data.fundData)
+            if (idx === -1) {
+              this.fundCount++
+              this.originData.push(res.data.fundData)
+            } else {
+              this.originData.splice(idx, 1, res.data.fundData)
+            }
           }
         })
         .catch(err => console.log(err))
     },
     delFund(id) {
+      this.fundCount--
       this.originData = this.originData.filter(item => item.id !== id)
       if (this.originData.length === 0) {
         this.originData = 'empty'

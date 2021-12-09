@@ -9,6 +9,10 @@
       <div class="left">上涨 {{ up }}</div>
       <div class="right">下跌 {{ down }}</div>
     </div>
+    <div class="shouyi" :class="todayMoney>0 ? 'red' : 'green'">
+      今日收益：{{ this.todayMoney.toFixed(2) }} &nbsp;
+      收益率：{{ (this.todayMoney / this.jsMoney * 100).toFixed(2) }}%
+    </div>
     <home-list :mb-data="mbData"/>
   </div>
 </template>
@@ -28,6 +32,8 @@ export default {
       down: 0,
       leftW: 50,
       rightW: 50,
+      todayMoney: 0,
+      jsMoney: 0,
     }
   },
   methods: {
@@ -35,6 +41,8 @@ export default {
       this.mbData = []
       this.up = 0
       this.down = 0
+      this.todayMoney = 0
+      this.jsMoney = 0
       const oData = this.originData
       if (oData === 'empty') {
         this.mbData = oData
@@ -44,6 +52,8 @@ export default {
         let leftBig, leftSmall, rightBig, rightSmall, paixu
         leftBig = item.name
         leftSmall = item.count * item.jsPrice
+        this.jsMoney = leftSmall
+        this.todayMoney += item.count * item.gsPrice - leftSmall
         paixu = item.gsPoint
         rightBig = `${paixu.toFixed(2)}%`
         rightSmall = (item.gsPrice - item.jsPrice) * item.count
@@ -139,5 +149,21 @@ export default {
   width: 100%;
   margin-top: 10px;
   box-shadow: 0 -1px 4px rgba(233, 233, 233, 1);
+}
+
+.shouyi {
+  float: left;
+  width: 100%;
+  line-height: 1.5;
+  margin-top: 0.3rem;
+  font-size: 0.88rem;
+}
+
+.red {
+  color: #e74c3c;
+}
+
+.green {
+  color: #27ae60;
 }
 </style>
