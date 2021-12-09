@@ -3,7 +3,7 @@
     <navbar :bar-title="barTitle"/>
     <div class="body" style="padding-bottom: 56px" :style="'height:'+bodyHeight">
       <keep-alive>
-        <router-view/>
+        <router-view :fundCount="fundCount"/>
       </keep-alive>
     </div>
   </div>
@@ -15,6 +15,7 @@ import Navbar from "../../components/Navbar";
 export default {
   name: "Settings",
   components: {Navbar},
+  props: ['fundCount'],
   data() {
     return {
       barTitle: '设置',
