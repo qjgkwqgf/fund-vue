@@ -4,7 +4,7 @@
     <van-cell-group inset>
       <van-cell title="登录账号" is-link @click="toLogin" v-if="!user"/>
       <van-cell title="当前登录账号" :value="user" v-else/>
-      <van-cell title="关注基金数" :value="fundCount+'/100'" v-if="user"/>
+      <van-cell title="关注基金数" :value="fundCount+' / 100'" v-if="user"/>
       <van-cell title="修改登录密码" is-link @click="changePass" v-if="user"/>
       <van-cell title="退出登录" is-link @click="exitLogin" v-if="user"/>
     </van-cell-group>

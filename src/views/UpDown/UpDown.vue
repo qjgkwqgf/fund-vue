@@ -52,7 +52,7 @@ export default {
         let leftBig, leftSmall, rightBig, rightSmall, paixu
         leftBig = item.name
         leftSmall = item.count * item.jsPrice
-        this.jsMoney = leftSmall
+        this.jsMoney += leftSmall
         this.todayMoney += item.count * item.gsPrice - leftSmall
         paixu = item.gsPoint
         rightBig = `${paixu.toFixed(2)}%`
