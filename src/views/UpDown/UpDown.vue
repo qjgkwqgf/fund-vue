@@ -13,7 +13,7 @@
       今日收益：{{ this.todayMoney.toFixed(2) }} &nbsp;
       收益率：{{ (this.todayMoney / this.jsMoney * 100).toFixed(2) }}%
     </div>
-    <home-list :mb-data="mbData"/>
+    <home-list :mb-data="mbData" :show-bg="true"/>
   </div>
 </template>
 

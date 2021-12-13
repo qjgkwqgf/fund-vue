@@ -35,7 +35,7 @@ export default {
     this.getFundData()
   },
   methods: {
-    getFundData() {
+    getFundData(cb) {
       this.originData = []
       this.fundCount = 0
       const token = this.$cookies.get('token')
@@ -45,13 +45,18 @@ export default {
             this.$cookies.remove('user')
             this.$cookies.remove('token')
             this.originData = 'empty'
+            if (cb) cb()
             return
           }
           this.originData = res.data.fundData
           this.fundCount = res.data.count
           if (this.originData.length === 0) this.originData = 'empty'
+          if (cb) cb()
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          if (cb) cb()
+        })
     },
     getSingleFund(code) {
       const token = this.$cookies.get('token')

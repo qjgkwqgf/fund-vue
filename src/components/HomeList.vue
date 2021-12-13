@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {getFundData} from "../http/api";
+
 export default {
   name: "HomeList",
   props: ['showBg', 'mbData'],
@@ -35,13 +37,12 @@ export default {
   },
   methods: {
     listClick(code) {
-      this.$router.push('/money/fund/'+code)
+      this.$router.push('/money/fund/' + code)
     },
     onRefresh() {
-      setTimeout(() => {
+      this.$parent.$parent.getFundData(() => {
         this.isLoading = false
-        console.log('刷新成功')
-      }, 1000)
+      })
     },
   }
 }
