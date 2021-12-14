@@ -8,7 +8,7 @@
         @click="listClick(fund.id)"
         class="list"
         :class="fund.point>0 ? 'red' : 'green'"
-        :style="showBg ? 'background: linear-gradient(to right, '+showBg+' '+Math.floor(Math.abs(point)*10)+'%, white 0%)' : ''"
+        :style="whatColor(fund.point)"
       >
         <div class="left">
           <div class="large">{{ fund.leftBig }}</div>
@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import {getFundData} from "../http/api";
-
 export default {
   name: "HomeList",
   props: ['showBg', 'mbData'],
@@ -44,6 +42,20 @@ export default {
         this.isLoading = false
       })
     },
+  },
+  computed: {
+    whatColor() {
+      let bg = this.showBg
+      return function (point) {
+        if (bg) {
+          let color = ''
+          point > 0 ? color = 'fadbd8' : color = 'd1f2eb'
+          return `background: linear-gradient(to right, #${color} ${Math.round(Math.abs(point) * 10)}%, white 0%)`
+        } else {
+          return ''
+        }
+      }
+    }
   }
 }
 </script>
