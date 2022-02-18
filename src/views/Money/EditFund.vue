@@ -37,6 +37,7 @@ export default {
         .catch(err => console.log(err))
     },
     setData() {
+      this.id = this.$route.params.id
       const oData = this.originData
       if (oData === 'empty') return
       const fund = oData.find(item => item.id === ~~this.id)
