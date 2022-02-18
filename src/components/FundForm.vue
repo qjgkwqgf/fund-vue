@@ -88,6 +88,16 @@ export default {
       this.about = '暂无'
     },
   },
+  watch: {
+    settings() {
+      this.fundCode = this.settings.fundCode
+      this.fundName = this.settings.fundName
+      this.count = this.settings.count
+      this.cost = this.settings.cost
+      this.maxSumPrice = this.settings.maxSumPrice
+      this.about = this.settings.about
+    }
+  },
 }
 </script>
 
